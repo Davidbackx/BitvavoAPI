@@ -9,8 +9,8 @@ bitvavo = Bitvavo()
 response = bitvavo.tickerPrice({})
 assets = bitvavo.assets({})
 PricesLatest24h = bitvavo.ticker24h({})
-api_key = "30477b338507ae0f02edf1d363ad7b28cc2c6ec19934b393a0940fb9f9ff6151"
-api_secret_key ="33ae1f6ad81423f557d8203a7305aa96d0da2a30c9d95765619ebfa5e41063dae4649eaa2ff811db19b407e7d85f12cc0546821677cebd316906e026abfba956"
+api_key = ""
+api_secret_key =""
 
 #help functions
 def get_max_price_from_name(currencyname):
@@ -181,5 +181,4 @@ test = get_trades(api_key,api_secret_key)
 print(test)
 time = datetime.fromtimestamp((1628984117053-3600000)/1000.0)
 print(get_account_win_loss(api_key,api_secret_key))
-api_key = "30477b338507ae0f02edf1d363ad7b28cc2c6ec19934b393a0940fb9f9ff6151"
-api_secret_key ="33ae1f6ad81423f557d8203a7305aa96d0da2a30c9d95765619ebfa5e41063dae4649eaa2ff811db19b407e7d85f12cc0546821677cebd316906e026abfba956"
+print(currencys)

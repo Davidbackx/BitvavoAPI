@@ -1,4 +1,4 @@
-import bitvavowallet
+import bitvavo.bitvavowallet as bitvavowallet
 import matplotlib.pyplot as plt
 
 currencys = bitvavowallet.currencys
