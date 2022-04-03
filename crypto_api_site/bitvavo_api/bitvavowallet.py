@@ -174,7 +174,29 @@ def get_trades(apiKey,apiSecretKey):
                 accounttrades["price"] = math.ceil(float(item["price"])*float(item["amount"]))
     return accounttrades
 #1 Jan 1970 for timestamps
+def get_orders(apiKey,apiSecretKey):
+    bitvavo = Bitvavo({"apikey":apiKey,"apisecret":apiSecretKey})
+    orders = []
+    order = {
+        "market":"",
+        "amount":0,
+        "price":0,
+        "timestamp":0
+    }
+    
+    for currency in get_account_currencys(apiKey,apiSecretKey):
+        currency = currency+"-EUR"
+        response = bitvavo.getOrders(currency, {})
+        for item in response:
+            order["market"] = (item["market"])
+            order["amount"] = (item["filledAmount"])
+            order["price"] = (item["fills"][0]["price"])
+            order["timestamp"] = (item["fills"][0]["timestamp"])
+            orders.append(order)
+    return orders
 currencys = get_totalinvested_per_currency(api_key,api_secret_key)
 currentvalues = get_all_currency_with_current_value(api_key,api_secret_key)
 test = get_trades(api_key,api_secret_key)
 time = datetime.fromtimestamp((1628984117053-3600000)/1000.0)
+print(get_account_currencys(api_key,api_secret_key)[0])
+
