@@ -50,7 +50,9 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-variables.py
+crypto_api_site/bitvavo_api/bitvavovariables.py
+crypto_api_site/kucoin_api/kucoinvariables.py
+
 
 # Translations
 *.mo

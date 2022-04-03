@@ -1,16 +1,15 @@
 from python_bitvavo_api.bitvavo import Bitvavo
-from requests import api
-import matplotlib.pyplot as plt
 import numpy as np
 import math
 from datetime import datetime
+#from bitvavovariables import bitvavo_api,bitvavo_secret_api
 
 bitvavo = Bitvavo()
 response = bitvavo.tickerPrice({})
 assets = bitvavo.assets({})
 PricesLatest24h = bitvavo.ticker24h({})
-api_key = ""
-api_secret_key =""
+api_key = '30477b338507ae0f02edf1d363ad7b28cc2c6ec19934b393a0940fb9f9ff6151'
+api_secret_key ='33ae1f6ad81423f557d8203a7305aa96d0da2a30c9d95765619ebfa5e41063dae4649eaa2ff811db19b407e7d85f12cc0546821677cebd316906e026abfba956'
 
 #help functions
 def get_max_price_from_name(currencyname):
@@ -178,7 +177,4 @@ def get_trades(apiKey,apiSecretKey):
 currencys = get_totalinvested_per_currency(api_key,api_secret_key)
 currentvalues = get_all_currency_with_current_value(api_key,api_secret_key)
 test = get_trades(api_key,api_secret_key)
-print(test)
 time = datetime.fromtimestamp((1628984117053-3600000)/1000.0)
-print(get_account_win_loss(api_key,api_secret_key))
-print(currencys)
