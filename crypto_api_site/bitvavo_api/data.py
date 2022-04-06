@@ -1,13 +1,8 @@
 
-from optparse import Values
-from turtle import color
-
-from matplotlib import animation
-from pyparsing import col
-#import bitvavowallet
+import bitvavowallet
 import matplotlib.pyplot as plt
 import numpy as np
-
+from bitvavovariables import bitvavo_api,bitvavo_secret_api
 
 # currencys = bitvavowallet.currencys
 # currencys_with_current_value = bitvavowallet.currentvalues
@@ -53,3 +48,18 @@ import numpy as np
 #     plt.show()
 # draw_pie_chart_of_all_currencys()
 # #val_and_current_val_per_coin()
+def line_chart_currency(currency):
+    purchases = bitvavowallet.get_orders_currency(bitvavo_api,bitvavo_secret_api,currency)
+    price = []
+    amount = []
+    timestamp = []
+    for order in purchases:
+        price.append(order["price"])
+        amount.append(order["amount"])
+        timestamp.append(order["timestamp"])
+    timestamp.sort()
+    x = np.linspace(timestamp[0],timestamp[-1],50)
+    plt.plot(x,price)
+
+    plt.show()
+line_chart_currency("ADA-EUR")

@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% block title %} Overzicht {% endblock %}
+{% block subtitle %} Overzicht {% endblock %}
+{% block currencylist %}
+    <div class="coin-card">
+        {% for coin in coins%}
+        <div class="currency">
+            Currency: {{coin.currency}}
+            Current price: {{coin.current_price}}
+            Total invested: {{coin.total_invested}}
+            Current value: {{coin.current_value}}
+            Average price: {{coin.average_price}}
+            VWAP: {{coin.vwap}}
+            Is it profitable based on average: {{coin.profitable_average}}
+            Is it profitable based on VWAP: {{coin.profitable_vwap}}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

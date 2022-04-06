@@ -1,3 +1,4 @@
+from cgi import print_arguments
 from python_bitvavo_api.bitvavo import Bitvavo
 import numpy as np
 import math
@@ -7,76 +8,18 @@ from datetime import datetime
 bitvavo = Bitvavo()
 response = bitvavo.tickerPrice({})
 assets = bitvavo.assets({})
-PricesLatest24h = bitvavo.ticker24h({})
+pricesLatest24h = bitvavo.ticker24h({})
 api_key = '30477b338507ae0f02edf1d363ad7b28cc2c6ec19934b393a0940fb9f9ff6151'
 api_secret_key ='33ae1f6ad81423f557d8203a7305aa96d0da2a30c9d95765619ebfa5e41063dae4649eaa2ff811db19b407e7d85f12cc0546821677cebd316906e026abfba956'
-
 #help functions
-def get_max_price_from_name(currencyname):
-    symbols = list()
-    names = list()
-    for symbol in assets:
-        symbols.append(symbol['symbol'])
-    for name in assets:
-        names.append(name['name'])
-    if currencyname is None:
-        return None
-    else:
-        if currencyname in symbols:
-            abrev = currencyname
-        else:
-            abrev = get_abrev_from_fullName(currencyname)
-        for minPrice in PricesLatest24h:
-            if abrev+'-EUR' in minPrice['market']:
-                return minPrice['high']
-
-def get_min_price_from_name(currencyname):
-    symbols = list()
-    names = list()
-    for symbol in assets:
-        symbols.append(symbol['symbol'])
-    for name in assets:
-        names.append(name['name'])
-    if currencyname is None:
-        return None
-    else:
-        if currencyname in symbols:
-            abrev = currencyname
-        else:
-            abrev = get_abrev_from_fullName(currencyname)
-        for minPrice in PricesLatest24h:
-            if abrev+'-EUR' in minPrice['market']:
-                return minPrice['low']
         
-def get_current_value_from_currency(currencyname):
-    symbols = list()
-    names = list()
-    abrev =''
-    for symbol in assets:
-        symbols.append(symbol['symbol'])
-    for name in assets:
-        names.append(name['name'])
-
-    if currencyname in symbols:
-        abrev = currencyname
-    else:
-        abrev = get_abrev_from_fullName(currencyname)
-    for price in response:
-        if abrev+'-EUR' in price['market']:
-            currentPrice = price['price']
-            return currentPrice
+def get_current_value_from_currency(currency):
+    if "-EUR" not in currency:
+        currency = currency+"-EUR"
+    for order in pricesLatest24h:
+        if order['market'] == currency:
+            return order['last']
         
-def get_fullName_from_abrev(currencyname):
-    currencyname = currencyname
-    for symbol in assets:
-        if symbol['symbol'] == currencyname:
-            return symbol['name']
-
-def get_abrev_from_fullName(currencyname):
-    currencyname = currencyname
-    for symbol in assets:
-        if symbol['name'] == currencyname:
-            return symbol['symbol']
 
 #account functions
 def get_account_currencys(apiKey,apiSecretKey): #['ADA', 'NANO', 'RSR', 'VET', 'XRP']
@@ -86,7 +29,7 @@ def get_account_currencys(apiKey,apiSecretKey): #['ADA', 'NANO', 'RSR', 'VET', '
     response = bitvavo.balance({})
     abrevs =list()
     for item in response:
-        abrevs.append(item['symbol'])
+        abrevs.append(item["symbol"])
     abrevs.pop(0)
     return [item for item in abrevs]
 
@@ -101,9 +44,6 @@ def get_total_account_deposits_in_eur(apiKey,apiSecretKey): #700
         totalAmount += int(item['amount'])
     return (totalAmount) 
 def get_total_account_balance(apiKey,apiSecretKey): #710.7
-    apiKey = api_key
-    apiSecretKey = api_secret_key
-
     bitvavo = Bitvavo({"apikey":apiKey,"apisecret":apiSecretKey})
     response = bitvavo.balance({})
     abrevs =list()
@@ -155,48 +95,112 @@ def get_all_currency_with_current_value(apiKey,apiSecretKey): #{'ADA': 282.97072
                 accountcurrencys[symbol] = float(get_current_value_from_currency(symbol))*float(value)
     return accountcurrencys
 
-def get_trades(apiKey,apiSecretKey):
-    bitvavo = Bitvavo({"apikey":apiKey,"apisecret":apiSecretKey})
-    response = bitvavo.trades('ADA-EUR', {})
-    accountcurrencys = get_account_currencys(apiKey,apiSecretKey)
-    accounttrades = {"timestamp":"","market":"","price":0}
-    for currency in accountcurrencys:
-        for item in bitvavo.trades(currency +'-EUR', {}):
-            if item["timestamp"] == accounttrades["timestamp"]:
-                accounttrades["timestamp"] = ""
-                accounttrades["market"] = ""
-                accounttrades["price"] = 0
-            else:
-                timestamp = datetime.fromtimestamp(item["timestamp"]/1000.0).date()
-                timestampStr = timestamp.strftime("%d-%b-%Y")
-                accounttrades["timestamp"] = timestampStr
-                accounttrades["market"] = item["market"]
-                accounttrades["price"] = math.ceil(float(item["price"])*float(item["amount"]))
-    return accounttrades
 #1 Jan 1970 for timestamps
-def get_orders(apiKey,apiSecretKey):
+def get_all_orders(apiKey,apiSecretKey):
     bitvavo = Bitvavo({"apikey":apiKey,"apisecret":apiSecretKey})
-    orders = []
-    order = {
-        "market":"",
-        "amount":0,
-        "price":0,
-        "timestamp":0
-    }
-    
+    orders = []   
     for currency in get_account_currencys(apiKey,apiSecretKey):
         currency = currency+"-EUR"
         response = bitvavo.getOrders(currency, {})
         for item in response:
-            order["market"] = (item["market"])
-            order["amount"] = (item["filledAmount"])
-            order["price"] = (item["fills"][0]["price"])
-            order["timestamp"] = (item["fills"][0]["timestamp"])
+            order = {
+                "market":"",
+                "amount":0,
+                "price":0,
+                "timestamp":0
+            } 
+            order["market"]=(item["market"])
+            order["amount"]=(item["filledAmount"])
+            order["price"]=(item["fills"][0]["price"])
+            order["timestamp"] = unixtimestamp_to_date(item["fills"][0]["timestamp"])
             orders.append(order)
     return orders
-currencys = get_totalinvested_per_currency(api_key,api_secret_key)
-currentvalues = get_all_currency_with_current_value(api_key,api_secret_key)
-test = get_trades(api_key,api_secret_key)
-time = datetime.fromtimestamp((1628984117053-3600000)/1000.0)
-print(get_account_currencys(api_key,api_secret_key)[0])
+def get_orders_currency(apiKey,apiSecretKey,currency):
+    all_orders = get_all_orders(apiKey,apiSecretKey)
+    orders = []
+    for item in all_orders:
+        order = {
+            "market":"",
+            "amount":0,
+            "price":0,
+            "timestamp":0
+        }
+        if item["market"] == currency:
+            order["market"] = currency
+            order["amount"] = item["amount"]
+            order["price"] = item["price"]
+            order["timestamp"] = item["timestamp"]
+            orders.append(order)
+    return orders
+def unixtimestamp_to_date(timestamp):
+    return str(datetime.fromtimestamp(timestamp/1000.0).date())
 
+def average_price_per_currency(apiKey,apiSecretKey,currency):
+    if "-EUR" not in currency:
+        currency = currency+"-EUR"
+    all_orders = get_all_orders(apiKey,apiSecretKey)
+    average_price : float = 0
+    total_orders_of_that_currency = 0
+    for order in all_orders:
+        if order["market"] == currency:
+            total_orders_of_that_currency += 1
+            average_price += float(order["price"])
+    return average_price/total_orders_of_that_currency
+def is_profitable_purchase(apiKey,apiSecretKey,currency):
+    if "-EUR" not in currency:
+        currency = currency+"-EUR"
+    current_price = get_current_value_from_currency(currency)
+    average_price = average_price_per_currency(apiKey,apiSecretKey,currency)
+    if float(current_price) < float(average_price):
+        return True
+    else:
+        return False
+def get_vwap_of_currency(currency):
+    if "-EUR" not in currency:
+        currency = currency+"-EUR"
+    typical_price :float = 0
+    vwap :float = 0
+    for order in pricesLatest24h:
+        if order["market"] == currency:
+            typical_price = (float(order["high"])+float(order["low"])+float(order["last"]))/3
+            vwap = (typical_price * float(order["volume"]))/float(order["volume"])
+    return round(vwap,3)
+def is_profitable_purchase_vwap(apiKey,apiSecretKey,currency):
+    current_price = get_current_value_from_currency(currency)
+    vwap = get_vwap_of_currency(apiKey,apiSecretKey,currency)
+    if float(current_price) < float(vwap):
+        return True
+    else:
+        return False
+def overview(apiKey,apiSecretKey,currency):
+    if "-EUR" not in currency:
+        currency = currency+"-EUR"
+    current_price = get_current_value_from_currency(currency)
+    average_price = average_price_per_currency(apiKey,apiSecretKey,currency)
+    vwap = get_vwap_of_currency(apiKey,apiSecretKey,currency)
+    total_invested = get_totalinvested_per_currency(apiKey,apiSecretKey)
+    profitable_average : bool = is_profitable_purchase(apiKey,apiSecretKey,currency)
+    profitable_vwap : bool = is_profitable_purchase_vwap(apiKey,apiSecretKey,currency)   
+    current_value = get_all_currency_with_current_value(apiKey,apiSecretKey)
+    total_invested_in_currency = 0
+    current_value_in_currency = 0
+    for item in total_invested.items():
+        currency_in_item = item[0]+"-EUR"
+        if currency_in_item == currency:
+            total_invested_in_currency = item[1]
+    for item in current_value.items():    
+        currency_in_item = item[0]+"-EUR"
+        if currency_in_item == currency:
+            current_value_in_currency = item[1]
+    return {"currency":currency,"current_price":current_price,"total_invested":total_invested_in_currency,"current_value":round(current_value_in_currency,3),"average_price":round(average_price,3),"vwap":round(vwap,3),"profitable_average":profitable_average,"profitable_vwap":profitable_vwap}
+def get_overview_all_coins(apiKey,apiSecretKey):
+    all_coins = get_account_currencys(apiKey,apiSecretKey)
+    overview_all_coins = []
+    for coin in all_coins:
+        coin = coin+"-EUR"
+        overview_all_coins.append(overview(apiKey,apiSecretKey,coin))
+    return overview_all_coins
+# currencys = get_totalinvested_per_currency(api_key,api_secret_key)
+# currencylist = get_account_currencys(api_key,api_secret_key)
+# account_overview = get_overview_all_coins(api_key,api_secret_key)
+print(get_vwap_of_currency("ADA"))

@@ -24,3 +24,4 @@ def get_plot(coin,value):
     fig.set_size_inches(10.5, 5.5)
     graph = get_graph()
     return graph
+

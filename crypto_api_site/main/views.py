@@ -1,3 +1,4 @@
+from sqlite3 import paramstyle
 from django.shortcuts import render
 import sys
 
@@ -8,7 +9,7 @@ from .utils import get_plot
 
 # Create your views here.
 def home(response):
-    currencylist = bitvavowallet.get_account_currencys(bitvavo_api,bitvavo_secret_api)
+    currencylist = bitvavowallet.currencylist
     params = {
         "title":"Home",
         "subtitle":"My crypto wallet visualized",
@@ -24,3 +25,9 @@ def wallet(request):
         "graph": graph
     }
     return render(request,"main/home.html",params)
+def overview(response):
+    account_overview = bitvavowallet.account_overview
+    params = {
+        "coins":account_overview
+    }
+    return render(response,"main/overview.html",params)
