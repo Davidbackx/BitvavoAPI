@@ -1,5 +1,6 @@
 from functools import total_ordering
 from lib2to3.pygram import Symbols
+import math
 from urllib import response
 from matplotlib.pyplot import pink
 from python_bitvavo_api.bitvavo import Bitvavo
@@ -79,6 +80,23 @@ def get_deposits(apiKey,apiSecretKey):
     total_deposited = ([int(deposit["amount"]) for deposit in response])
     total_deposited_sum = sum(total_deposited)
 
+def get_totalinvested_per_currency(apiKey,apiSecretKey): #{'ADA': 265, 'NANO': 30, 'RSR': 185, 'VET': 150, 'XRP': 70}
+    bitvavo = Bitvavo({"apikey":apiKey,"apisecret":apiSecretKey})
+    _,account_currencys = get_account_currencies(apiKey,apiSecretKey)
+    all_currencies = []  
+    for currency in account_currencys:
+        currencys = {"symbol":"","total":0}
+        if currency not in currencys:
+            currencys["symbol"] = currency
+            currencys["total"] = 0
+        total_value = 0
+        for item in bitvavo.trades(currency, {}):
+            value = float(item["price"]) * float(item["amount"])
+            total_value += value
+        currencys["total"] = math.ceil(total_value)
+        all_currencies.append(currencys)
+    return all_currencies
+
 def get_overview(apiKey,apiSecretKey):
     
     overview_account = []
@@ -88,8 +106,10 @@ def get_overview(apiKey,apiSecretKey):
         overview = {
         "currency":currency,
         "current_price":float,
+        "current_total_value":float,
+        "amount":float,
         "total_invested":float,
-        "total_value":float,
+        "profit_ratio":float,
         "VWAP":float,
         "is_profitable_purchase":bool
         }
@@ -97,15 +117,20 @@ def get_overview(apiKey,apiSecretKey):
         for item in total:
             if item["symbol"] == currency:
                 overview["currency"] = item["symbol"]
-                overview["total_invested"] = item["total"]
+                overview["amount"] = item["total"]
         for item in get_vwap_of_currency_for_account_currencies(apiKey,apiSecretKey):
             if item["market"] == currency:
                 overview["VWAP"] = item["VWAP"]
                 overview["is_profitable_purchase"] = float(overview["VWAP"]) > float(overview["current_price"])
         for item in get_total_value_per_currency(apiKey,apiSecretKey):
             if item["symbol"] == currency:
-                overview["total_value"] = item["total_value"]
+                overview["current_total_value"] = item["total_value"]
+        for item in get_totalinvested_per_currency(apiKey,apiSecretKey):
+            if item["symbol"] == currency:
+                overview["total_invested"] = item["total"]
+        overview["profit_ratio"] = round((float(overview["current_total_value"])/float(overview["total_invested"])),2)
         overview_account.append(overview)
     return overview_account
-_,currencylist = get_account_currencies(api_key,api_secret)
+#_,currencylist = get_account_currencies(api_key,api_secret)
 account_overview = get_overview(api_key,api_secret)
+print(account_overview)

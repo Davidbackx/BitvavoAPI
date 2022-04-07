@@ -1,3 +1,8 @@
+*{
+    background-color:white;
+    color:black;
+}
+
 h5 {
     font-size: 1.5em;
 }
@@ -11,5 +16,33 @@ h5 {
 .h1{
     font-size:2em;
     text-align: center;
+}
+body{
+    background-color:white;
+    margin-left: 9rem;
+}
+.list-group-flush .list-group-item{
+    background-color:white;
+    height: 7vh;
+}
+.column{
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    /* border: white solid 5px; */
+    border-radius: 25%;
+    width: 100%;
+}
+/* #positive{
+    border-color:#9beb34;
+}
+#negative{
+    border-color:#eb4034;
+} */
+.card{
+    width: 20vw;
+    display: inline-flex;
+    margin-bottom: 1vh;
+    box-shadow: 5px 5px blue, 10px 10px red, 15px 15px green;
 }
 

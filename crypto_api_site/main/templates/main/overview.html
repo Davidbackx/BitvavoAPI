@@ -4,23 +4,20 @@ Overzicht
 {% endblock %}
 {% block subtitle %} <h1 class="h1">Overview of all your coins</h1> {% endblock %}
 {% block content %} 
-    {% for coin in coins%}
-        <div class="coin-card">
-            <div class="column">      
-                <div class="col-sm-6">
-                    <div class="card-body">
-                        <h5 class="card-title">{{coin.currency}}</h5>
-                    </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Current price: {{coin.current_price}}</li>
-                            <li class="list-group-item">Total invested: {{coin.total_invested}}</li>
-                            <li class="list-group-item">Total value: {{coin.total_value}}</li>
-                            <li class="list-group-item">VWAP: {{coin.VWAP}}</li>
-                            <li class="list-group-item">Profitable purchase: {{coin.is_profitable_purchase}}</li>
-                        </ul>
-                    </div>
-                </div>            
-            </div>        
-        </div>
+    {% for coin in coins %}
+        <div class="card">           
+            <div class="card-body">
+                <h5 class="card-title">{{coin.currency}}</h5>
+            </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" >Current price: €{{coin.current_price}}</li>
+                    <li class="list-group-item" >Current Total: €{{coin.current_total_value}}</li>
+                    <li class="list-group-item" >Amount: {{coin.amount}}</li>
+                    <li class="list-group-item" >Total invested: €{{coin.total_invested}}</li>
+                    <li class="list-group-item" >profit_ratio: {{coin.profit_ratio}}</li>
+                    <li class="list-group-item" >VWAP: €{{coin.VWAP}}</li>
+                    <li class="list-group-item" >Profitable purchase: {{coin.is_profitable_purchase}}</li>
+                </ul>
+            </div>
     {% endfor %}
 {% endblock %}
