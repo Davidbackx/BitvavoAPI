@@ -1,0 +1,15 @@
+h5 {
+    font-size: 1.5em;
+}
+.coin-card{
+    float:left;
+    width:25%;
+}
+.list-group-item{
+    width:100%;
+}
+.h1{
+    font-size:2em;
+    text-align: center;
+}
+

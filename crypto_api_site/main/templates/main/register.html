@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+{% block title %}Register{% endblock %}
+{% block subtitle %} You can register here {% endblock %}
+{% block content %}
+    <form method="post" action="/register/">
+        {{form}}
+        <button type="submit" name="register">Register</button>
+    </form>
+{% endblock %}

@@ -1,19 +1,26 @@
 {% extends "main/base.html" %}
-{% block title %} Overzicht {% endblock %}
-{% block subtitle %} Overzicht {% endblock %}
-{% block currencylist %}
-    <div class="coin-card">
-        {% for coin in coins%}
-        <div class="currency">
-            Currency: {{coin.currency}}
-            Current price: {{coin.current_price}}
-            Total invested: {{coin.total_invested}}
-            Current value: {{coin.current_value}}
-            Average price: {{coin.average_price}}
-            VWAP: {{coin.vwap}}
-            Is it profitable based on average: {{coin.profitable_average}}
-            Is it profitable based on VWAP: {{coin.profitable_vwap}}
+{% block title %} 
+Overzicht
+{% endblock %}
+{% block subtitle %} <h1 class="h1">Overview of all your coins</h1> {% endblock %}
+{% block content %} 
+    {% for coin in coins%}
+        <div class="coin-card">
+            <div class="column">      
+                <div class="col-sm-6">
+                    <div class="card-body">
+                        <h5 class="card-title">{{coin.currency}}</h5>
+                    </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Current price: {{coin.current_price}}</li>
+                            <li class="list-group-item">Total invested: {{coin.total_invested}}</li>
+                            <li class="list-group-item">Total value: {{coin.total_value}}</li>
+                            <li class="list-group-item">VWAP: {{coin.VWAP}}</li>
+                            <li class="list-group-item">Profitable purchase: {{coin.is_profitable_purchase}}</li>
+                        </ul>
+                    </div>
+                </div>            
+            </div>        
         </div>
-        {% endfor %}
-    </div>
+    {% endfor %}
 {% endblock %}
