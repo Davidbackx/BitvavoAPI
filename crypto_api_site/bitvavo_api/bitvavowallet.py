@@ -1,9 +1,9 @@
 from python_bitvavo_api.bitvavo import Bitvavo
 import math
 from datetime import datetime
-#from bitvavovariables import bitvavo_api,bitvavo_secret_api
-api_key = '30477b338507ae0f02edf1d363ad7b28cc2c6ec19934b393a0940fb9f9ff6151'
-api_secret_key ='33ae1f6ad81423f557d8203a7305aa96d0da2a30c9d95765619ebfa5e41063dae4649eaa2ff811db19b407e7d85f12cc0546821677cebd316906e026abfba956'
+from bitvavovariables import bitvavo_api,bitvavo_secret_api
+api_key = bitvavo_api
+api_secret_key =bitvavo_secret_api
 
 def init_account(apiKey,apiSecretKey):
     return Bitvavo({"apikey":apiKey,"apisecret":apiSecretKey})
