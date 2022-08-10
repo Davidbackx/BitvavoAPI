@@ -21,3 +21,12 @@ Overzicht
             </div>
     {% endfor %}
 {% endblock %}
+{% block form %}
+<form action="/overviewpost/" method="post">{%csrf_token%}
+    <label for="api-key">api-key: </label>
+    <input id="api-key" type="text" name="api-key" >
+    <label for="api-key-secret">api-key-secret: </label>
+    <input id="api-key-secret" type="text" name="api-key-secret" >
+    <input type="submit" value="OK">
+</form>
+{% endblock %}

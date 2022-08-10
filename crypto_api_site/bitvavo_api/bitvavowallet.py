@@ -176,7 +176,7 @@ def overview(apiKey,apiSecretKey,currency):
     vwap = get_vwap_of_currency(currency)
     total_invested = get_totalinvested_per_currency(apiKey,apiSecretKey)
     profitable_average : bool = is_profitable_purchase(apiKey,apiSecretKey,currency)
-    profitable_vwap : bool = is_profitable_purchase_vwap(apiKey,apiSecretKey,currency)   
+    profitable_vwap : bool = is_profitable_purchase_vwap(currency)   
     current_value = get_all_currency_with_current_value(apiKey,apiSecretKey)
     total_invested_in_currency = 0
     current_value_in_currency = 0
@@ -197,6 +197,6 @@ def get_overview_all_coins(apiKey,apiSecretKey):
         overview_all_coins.append(overview(apiKey,apiSecretKey,coin))
     return overview_all_coins
 currencys = get_totalinvested_per_currency(api_key,api_secret_key)
-currencylist = get_account_currencys(api_key,api_secret_key)
-account_overview = get_overview_all_coins(api_key,api_secret_key)
+# currencylist = get_account_currencys(api_key,api_secret_key)
+# account_overview = get_overview_all_coins(api_key,api_secret_key)
 print(currencys)

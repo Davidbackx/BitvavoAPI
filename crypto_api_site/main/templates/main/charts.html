@@ -1,6 +1,7 @@
 {% extends "main/base.html" %}
+{% load  static %}
 {% block title %}Home{% endblock %}
 {% block subtitle %}<h1 class="h1">Welcome to your crypto wallet visualized</h1>{% endblock %}
 {% block content %}
-<p>Graphs to come here soon</p>
+<img src"{% static 'main/images/barchart.png' %}" width="200" height="200">
 {% endblock %}

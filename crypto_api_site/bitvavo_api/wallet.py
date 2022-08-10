@@ -1,8 +1,4 @@
-from functools import total_ordering
-from lib2to3.pygram import Symbols
 import math
-from urllib import response
-from matplotlib.pyplot import pink
 from python_bitvavo_api.bitvavo import Bitvavo
 #from bitvavovariables import bitvavo_api,bitvavo_secret_api
 
@@ -128,9 +124,14 @@ def get_overview(apiKey,apiSecretKey):
         for item in get_totalinvested_per_currency(apiKey,apiSecretKey):
             if item["symbol"] == currency:
                 overview["total_invested"] = item["total"]
-        overview["profit_ratio"] = round((float(overview["current_total_value"])/float(overview["total_invested"])),2)
+        if overview["total_invested"]>1:
+            overview["profit_ratio"] = round((float(overview["current_total_value"])/float(overview["total_invested"])),2)
+        else:
+            overview["profit_ratio"] = 0
         overview_account.append(overview)
     return overview_account
-#_,currencylist = get_account_currencies(api_key,api_secret)
+total,currencylist = get_account_currencies(api_key,api_secret)
 account_overview = get_overview(api_key,api_secret)
-print(account_overview)
+total_invested = get_totalinvested_per_currency(api_key,api_secret)
+current_value = get_total_value_per_currency(api_key,api_secret)
+account_overview = get_overview(api_key,api_secret)

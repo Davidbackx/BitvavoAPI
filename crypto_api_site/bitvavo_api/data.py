@@ -1,5 +1,5 @@
 
-import bitvavowallet
+import wallet
 import matplotlib.pyplot as plt
 import numpy as np
 from bitvavovariables import bitvavo_api,bitvavo_secret_api
@@ -48,18 +48,48 @@ from bitvavovariables import bitvavo_api,bitvavo_secret_api
 #     plt.show()
 # draw_pie_chart_of_all_currencys()
 # #val_and_current_val_per_coin()
-def line_chart_currency(currency):
-    purchases = bitvavowallet.get_orders_currency(bitvavo_api,bitvavo_secret_api,currency)
-    price = []
-    amount = []
-    timestamp = []
-    for order in purchases:
-        price.append(order["price"])
-        amount.append(order["amount"])
-        timestamp.append(order["timestamp"])
-    timestamp.sort()
-    x = np.linspace(timestamp[0],timestamp[-1],50)
-    plt.plot(x,price)
 
+# def line_chart_currency(currency):
+#     purchases = bitvavowallet.get_orders_currency(bitvavo_api,bitvavo_secret_api,currency)
+#     price = []
+#     amount = []
+#     timestamp = []
+#     for order in purchases:
+#         price.append(order["price"])
+#         amount.append(order["amount"])
+#         timestamp.append(order["timestamp"])
+#     timestamp.sort()
+#     x = np.linspace(timestamp[0],timestamp[-1],50)
+#     plt.plot(x,price)
+
+#     plt.show()
+currencies = wallet.total_invested
+current_val = wallet.current_value
+# print(current_val)
+def val_and_current_val_per_coin():
+    coin = ([item["symbol"] for item in currencies])
+    value = ([item["total"] for item in currencies])
+    currentval = ([item["total_value"] for item in current_val])
+    color = [] 
+    for i in range(len(coin)):
+        if value[i] > currentval[i]:
+            color.append("RED")
+        elif value[i] == currentval[i]:
+            color.append = "ORANGE"
+        else:
+            color.append("GREEN")
+    X = np.arange(len(coin))
+    width = 0.35
+    fig,ax = plt.subplots()
+    rects1 = ax.bar(X-width/2,value,width)
+    rects2 = ax.bar(X+width/2,currentval,width,color=color)
+    ax.set_xlabel("coins")
+    ax.set_ylabel("value")
+    ax.set_title("total invested and currentval per coin")
+    ax.set_xticks(X,coin)
+    ax.legend()
+    ax.bar_label(rects1,padding=0.35)
+    ax.bar_label(rects2,padding=0.35)
+    fig.tight_layout()
     plt.show()
-line_chart_currency("ADA-EUR")
+val_and_current_val_per_coin()
