@@ -1,0 +1,53 @@
+{% extends "main/base.html" %}
+{% block title %} 
+General Data
+{% endblock %}
+{% block subtitle %} 
+    <h1 class="h1">General data</h1> 
+    <h3 class="h3"> This data is from the last {{timespan}} days - last update was on {{last_update}}</h3>
+{% endblock %}
+{% block form %}
+<div class="form">
+<form action="/data/search/" method="get">
+    <div class="form-outline">
+        <input type="search" class="form-control" id="form1" name="currency">
+        <button class="form-label" for="datatable-search-input">Search</button>
+    </div>
+</form>
+</div>
+{% endblock %}
+{% block content %} 
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Currency</th>
+            <th scope="col">Current_price</th>
+            <th scope="col">Minimum</th>
+            <th scope="col">Maximum</th>
+            <th scope="col">Average</th>
+            <th scope="col">Perc_coin_above_avg</th>
+            <th scope="col">Perc_coin_beneath_avg</th>
+            <th scope="col">avg_price_above_avg</th>
+            <th scope="col">avg_price_beneath_avg</th>
+          </tr>
+        </thead>
+        {% for coin in coins %}      
+        <tbody>        
+          <tr>
+            <td scope='row'>{{coin.currency}}</td>
+            <td>{{coin.current}}</td>
+            <td>€{{coin.minimum}}</td>
+            <td>€{{coin.maximum}}</td>
+            <td>€{{coin.average}}</td>
+            <td>{{coin.perc_above_avg}}%</td>
+            <td>{{coin.perc_beneath_avg}}%</td>
+            <td>€{{coin.avg_price_above_avg}}</td>
+            <td>€{{coin.avg_price_beneath_avg}}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>   
+{% endblock %}
+
+

@@ -13,13 +13,12 @@ h5 {
 .list-group-item{
     width:100%;
 }
-.h1{
+.h1, .h3{
     font-size:2em;
     text-align: center;
 }
 body{
     background-color:white;
-    margin-left: 9rem;
 }
 .list-group-flush .list-group-item{
     background-color:white;
@@ -45,3 +44,57 @@ body{
     margin-bottom: 1vh;
     box-shadow: 5px 5px lightgrey;
 }
+.form {
+    margin-bottom: 1.5rem!important;
+    display: flex;
+}
+.form-control{
+    display: flex;
+    width: 100%;
+}
+.form-outline{
+    display:flex;
+}
+.form-label{
+    border-radius:0.25rem;
+    margin-left: 0.5rem;
+}
+.body{
+    margin: 0 7rem 0 7rem;
+}
+#navbar{
+    flex-direction: row;
+    height:5rem;
+}
+a{
+    color:#000000;
+    padding:1rem;
+}
+li{
+    background-color:none;
+}
+nav{
+    margin: 2rem 0 2rem 0;
+}
+nav ul{
+    display:flex;
+    justify-content:space-between;
+    margin: 0 7rem 0 7rem;
+    width:75%;
+}
+nav ul li{
+    list-style-type:none;
+}
+nav ul li a{
+    font-size:20px;
+    color:#000000;
+}
+nav ul li a:hover, .overview:hover{
+    color: gold;
+    text-decoration: none;
+}
+.overview-currency{
+    border-radius:0.25rem;
+    margin: 1rem 0 1rem 0;
+}
+

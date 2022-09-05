@@ -6,5 +6,7 @@ urlpatterns = [
     path("charts/",views.barchart,name="barchart"),
     path("register/", views.register, name="register"),
     path("overview/", views.overview, name="overview"),
-    path("overviewpost/", views.overviewpost, name="overviewpost")
+    path("data/",views.data, name="data"),
+    path('data/search/',views.data_search),
+    path("overview/user/", views.overviewpost, name="overviewpost")
 ]

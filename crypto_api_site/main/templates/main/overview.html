@@ -3,7 +3,8 @@
 Overzicht
 {% endblock %}
 {% block subtitle %} <h1 class="h1">Overview of all your coins</h1> {% endblock %}
-{% block content %} 
+{% block content %}
+    <div>
     {% for coin in coins %}
         <div class="card">           
             <div class="card-body">
@@ -20,13 +21,14 @@ Overzicht
                 </ul>
             </div>
     {% endfor %}
+    </div>
 {% endblock %}
 {% block form %}
-<form action="/overviewpost/" method="post">{%csrf_token%}
+<form action="/overview/user/" method="post">{%csrf_token%}
     <label for="api-key">api-key: </label>
-    <input id="api-key" type="text" name="api-key" >
+    <input class="form-control" id="api-key" type="text" name="api-key" >
     <label for="api-key-secret">api-key-secret: </label>
-    <input id="api-key-secret" type="text" name="api-key-secret" >
-    <input type="submit" value="OK">
+    <input class="form-control" id="api-key-secret" type="text" name="api-key-secret" >
+    <input class="overview-currency" type="submit" value="Get your own overview">
 </form>
 {% endblock %}

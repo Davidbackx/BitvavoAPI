@@ -9,3 +9,5 @@ class RegisterForm(forms.Form):
     confirm_password = forms.CharField(label="Confirm Password", max_length=100, widget=forms.PasswordInput)
     api_key = forms.CharField(label="API Key", max_length=200)
     api_secret_key  = forms.CharField(label="API Secret Key", max_length=200)
+class CurrencyForm(forms.Form):
+    currency = forms.CharField(label="Currency", max_length=15 )

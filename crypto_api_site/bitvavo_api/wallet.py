@@ -1,6 +1,10 @@
 import math
 from python_bitvavo_api.bitvavo import Bitvavo
-#from bitvavovariables import bitvavo_api,bitvavo_secret_api
+from bitvavo_api.bitvavovariables import bitvavo_api,bitvavo_secret_api
+from datetime import datetime
+
+api_key = bitvavo_api
+api_secret = bitvavo_secret_api
 
 def get_account_currencies(apiKey,apiSecretKey):
     bitvavo = Bitvavo({"apikey":apiKey,"apisecret":apiSecretKey})
@@ -90,7 +94,21 @@ def get_totalinvested_per_currency(apiKey,apiSecretKey): #{'ADA': 265, 'NANO': 3
         all_currencies.append(currencys)
     return all_currencies
 
-def get_overview(apiKey,apiSecretKey):
+def decorator(func):
+    def wrapper(*args, **kwargs):
+        print("We are fetching your data")
+        return func(*args, **kwargs)
+    return wrapper
+def timer_decorator(func):
+    def time_wrapper(*args, **kwargs):
+        print("we are timeing this function")
+        x = datetime.now()
+        func(*args, **kwargs)
+        return datetime.now()-x
+    return time_wrapper
+
+
+def overview(apiKey,apiSecretKey):
     
     overview_account = []
     total,symbols = get_account_currencies(apiKey,apiSecretKey)
@@ -127,8 +145,8 @@ def get_overview(apiKey,apiSecretKey):
             overview["profit_ratio"] = 0
         overview_account.append(overview)
     return overview_account
+# print(overview(api_key, api_secret))
 total,currencylist = get_account_currencies(api_key,api_secret)
-account_overview = get_overview(api_key,api_secret)
+account_overview = overview(api_key,api_secret)
 total_invested = get_totalinvested_per_currency(api_key,api_secret)
 current_value = get_total_value_per_currency(api_key,api_secret)
-account_overview = get_overview(api_key,api_secret)
