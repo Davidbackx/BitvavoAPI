@@ -1,8 +1,8 @@
-
-import wallet
+import bitvavo_api.wallet as wallet
 import matplotlib.pyplot as plt
 import numpy as np
-from bitvavovariables import bitvavo_api,bitvavo_secret_api
+from bitvavo_api.bitvavovariables import bitvavo_api,bitvavo_secret_api
+import os
 
 # currencys = bitvavowallet.currencys
 # currencys_with_current_value = bitvavowallet.currentvalues
@@ -65,7 +65,6 @@ from bitvavovariables import bitvavo_api,bitvavo_secret_api
 #     plt.show()
 currencies = wallet.total_invested
 current_val = wallet.current_value
-# print(current_val)
 def val_and_current_val_per_coin():
     coin = ([item["symbol"] for item in currencies])
     value = ([item["total"] for item in currencies])
@@ -86,10 +85,12 @@ def val_and_current_val_per_coin():
     ax.set_xlabel("coins")
     ax.set_ylabel("value")
     ax.set_title("total invested and currentval per coin")
-    ax.set_xticks(X,coin)
+    ax.set_xticks(X,(coin))
     ax.legend()
-    ax.bar_label(rects1,padding=0.35)
-    ax.bar_label(rects2,padding=0.35)
-    fig.tight_layout()
-    plt.show()
-val_and_current_val_per_coin()
+    ax.bar_label(rects1,padding=width)
+    ax.bar_label(rects2,padding=width)
+    fig.set_size_inches(10,5)
+    # fig.tight_layout()
+    DIR = 'D:\\David\\Programeer projecten\\BitvavoAPI\\crypto_api_site\\main\\static\\main\\images\\barchart_coins.png'
+    plt.rcParams["savefig.directory"] = os.chdir(os.path.dirname(DIR))
+    plt.savefig('barchart_coins.png')

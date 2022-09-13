@@ -101,7 +101,6 @@ def decorator(func):
     return wrapper
 def timer_decorator(func):
     def time_wrapper(*args, **kwargs):
-        print("we are timeing this function")
         x = datetime.now()
         func(*args, **kwargs)
         return datetime.now()-x
@@ -109,7 +108,6 @@ def timer_decorator(func):
 
 
 def overview(apiKey,apiSecretKey):
-    
     overview_account = []
     total,symbols = get_account_currencies(apiKey,apiSecretKey)
 
@@ -145,7 +143,7 @@ def overview(apiKey,apiSecretKey):
             overview["profit_ratio"] = 0
         overview_account.append(overview)
     return overview_account
-# print(overview(api_key, api_secret))
+# print(timer_decorator(overview(api_key,api_secret))())
 total,currencylist = get_account_currencies(api_key,api_secret)
 account_overview = overview(api_key,api_secret)
 total_invested = get_totalinvested_per_currency(api_key,api_secret)

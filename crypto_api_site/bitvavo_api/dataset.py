@@ -3,7 +3,7 @@ from datetime import datetime
 from python_bitvavo_api.bitvavo import Bitvavo
 
 def read_data():
-    with open ('bitvavo_api\\dataset.txt','r') as data:
+    with open ('D:\\David\\Programeer projecten\\BitvavoAPI\\crypto_api_site\\bitvavo_api\\dataset.txt','r') as data:
         data = data.readlines()
         return data
     
