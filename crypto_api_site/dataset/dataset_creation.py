@@ -7,11 +7,19 @@ import time
 bitvavo = Bitvavo()
 response = bitvavo.ticker24h({})
 
-with open("D:\\David\\cryptomarket_dataset\\crypto-dataset\\dataset.txt","r+") as output:
+with open("D:\\David\\bitvavoApi\\crypto_api_site\\dataset\\dataset_raw.txt","r+") as output:
      crypto_data = output.read()
      for market in response:
         if '-BTC' not in market["market"]:
-            output.write(f'{market}\n')
+            has_none_values = False
+            for item in market.items():
+                if item == None:
+                    has_none_values = True
+                    break
+            if not has_none_values:
+                str_market = str(market)
+                changed = str_market.replace("'","\"")
+                output.write(f"{changed}\n")
 
 
 

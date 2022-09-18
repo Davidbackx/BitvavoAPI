@@ -1,6 +1,6 @@
 import math
 from python_bitvavo_api.bitvavo import Bitvavo
-from bitvavo_api.bitvavovariables import bitvavo_api,bitvavo_secret_api
+from bitvavovariables import bitvavo_api,bitvavo_secret_api
 from datetime import datetime
 
 api_key = bitvavo_api

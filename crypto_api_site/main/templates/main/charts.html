@@ -1,7 +1,22 @@
 {% extends "main/base.html" %}
 {% load  static %}
 {% block title %}Charts{% endblock %}
-{% block subtitle %}<h1 class="h1">Welcome to your crypto wallet visualized</h1>{% endblock %}
+{% block subtitle %}<h1 class="h1">Charts overview</h1>{% endblock %}
 {% block content %}
-<img src'{% static 'main/images/barchart_coins.png' %}' alt='barchart'>
+    <div class="charts">
+        <img id="barchart" type="image/png" src="{% static "main/images/barchart_coins.png" %}" alt="barchart">
+        <img id="piechart" type="image/png" src="{% static "main/images/piechart_coins.png" %}" alt="piechart">
+        <div class="linechart">
+            <form action="/charts/line/" method="post">{%csrf_token%}
+                <div class="form-outline">
+                    <input type="search" class="form-control" id="form1" name="currency" placeholder="currency">
+                    <input type="number" class="form-control" id="form1" name="timespan" placeholder="timespan">
+                    <button class="form-label" for="datatable-search-input">Find Coin</button>
+                </div>
+            </form>
+            <img id="linechart" type="image/png" src="{% static "main/images/linechart_coins.png" %}" alt="linechart">
+        </div
+        
+    </div>
+    
 {% endblock %}

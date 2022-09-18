@@ -16,6 +16,7 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="/charts">Charts</a></li>
                     <li><a href="/overview">Overview</a></li>
                     <li><a href="/data">General data</a></li>
                   </ul>
@@ -23,7 +24,7 @@
         </header>
         <div class="body">
         {% block subtitle %}<h2>>ou forgot to place a subtitle in your file<h2>{% endblock %}
-        {% block form %}<p>You forgot to place a fom in your file</p>{% endblock %}
+        {% block form %}{% endblock %}
         {% block content %}
         <p>You forgot to place a content in your file</p>
         {% endblock %}

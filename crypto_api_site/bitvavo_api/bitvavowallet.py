@@ -2,6 +2,7 @@ from python_bitvavo_api.bitvavo import Bitvavo
 import math
 from datetime import datetime
 from bitvavovariables import bitvavo_api,bitvavo_secret_api
+
 api_key = bitvavo_api
 api_secret_key =bitvavo_secret_api
 

@@ -95,8 +95,8 @@ def avg_price_if_price_beneath_avg(coin):
 def all_currencies():
     data = read_data()
     currencies = []
-    for i in range(len(data)):
-        item = json.loads(data[i])
+    for idx in range(len(data)):
+        item = json.loads(data[idx])
         if item['market'] not in currencies:
             currencies.append(item['market'])
     return currencies
@@ -135,7 +135,9 @@ def overview():
     with open ("D:\\David\\bitvavoApi\\crypto_api_site\\bitvavo_api\\calculated_dataset.txt","w") as output:
         for currency in currencies:
             overview = overview_currency(currency)
-            output.write(f"{overview}\n")
+            str_overview = str(overview)
+            changed = str_overview.replace("'","\"")
+            output.write(f"{changed}\n")
 
 def overview2():
     currencies = all_currencies()
