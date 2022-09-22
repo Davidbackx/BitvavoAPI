@@ -12,11 +12,8 @@ with open("D:\\David\\bitvavoApi\\crypto_api_site\\dataset\\dataset_raw.txt","r+
      for market in response:
         if '-BTC' not in market["market"]:
             has_none_values = False
-            for item in market.items():
-                if item == None:
-                    has_none_values = True
-                    break
-            if not has_none_values:
+            values = ([item for item in market.values()])
+            if None not in values:
                 str_market = str(market)
                 changed = str_market.replace("'","\"")
                 output.write(f"{changed}\n")
