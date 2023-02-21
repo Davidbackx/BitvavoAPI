@@ -1,0 +1,6 @@
+{"currency": "1INCH-EUR", "current": 0.616, "average": 0.557, "minimum": 0.353, "maximum": 0.849, "perc_above_avg": 55.838, "perc_beneath_avg": 44.162, "avg_price_above_avg": 0.641, "avg_price_beneath_avg": 0.451}
+{"currency": "AAVE-EUR", "current": 82.2, "average": 74.371, "minimum": 48.56, "maximum": 107.61, "perc_above_avg": 62.437, "perc_beneath_avg": 37.563, "avg_price_above_avg": 83.731, "avg_price_beneath_avg": 58.813}
+{"currency": "ADA-EUR", "current": 0.369, "average": 0.386, "minimum": 0.227, "maximum": 0.56, "perc_above_avg": 50.761, "perc_beneath_avg": 49.239, "avg_price_above_avg": 0.458, "avg_price_beneath_avg": 0.313}
+{"currency": "ADX-EUR", "current": 0.19, "average": 0.154, "minimum": 0.102, "maximum": 0.217, "perc_above_avg": 61.929, "perc_beneath_avg": 38.071, "avg_price_above_avg": 0.172, "avg_price_beneath_avg": 0.123}
+{"currency": "AION-EUR", "current": 0.024, "average": 0.035, "minimum": 0.024, "maximum": 0.049, "perc_above_avg": 46.193, "perc_beneath_avg": 53.807, "avg_price_above_avg": 0.041, "avg_price_beneath_avg": 0.03}
+{"currency": "AKRO-EUR", "current": 0.005, "average": 0.004, "minimum": 0.002, "maximum": 0.005, "perc_above_avg": 50.254, "perc_beneath_avg": 49.746, "avg_price_above_avg": 0.004, "avg_price_beneath_avg": 0.003}
