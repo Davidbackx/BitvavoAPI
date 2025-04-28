@@ -1,4 +1,4 @@
-{"currency": "1INCH-EUR", "current": 0.154, "average": 0.548, "minimum": 0.292, "maximum": 0.849, "perc_above_avg": 53.081, "perc_beneath_avg": 46.919, "avg_price_above_avg": 0.639, "avg_price_beneath_avg": 0.445}
-{"currency": "AAVE-EUR", "current": 125.01, "average": 73.801, "minimum": 48.56, "maximum": 107.61, "perc_above_avg": 59.242, "perc_beneath_avg": 40.758, "avg_price_above_avg": 83.58, "avg_price_beneath_avg": 59.588}
-{"currency": "ADA-EUR", "current": 0.554, "average": 0.382, "minimum": 0.227, "maximum": 0.56, "perc_above_avg": 47.393, "perc_beneath_avg": 52.607, "avg_price_above_avg": 0.458, "avg_price_beneath_avg": 0.314}
-{"currency": "ADX-EUR", "current": 0.077, "average": 0.154, "minimum": 0.102, "maximum": 0.217, "perc_above_avg": 62.085, "perc_beneath_avg": 37.915, "avg_price_above_avg": 0.172, "avg_price_beneath_avg": 0.125}
+{"currency": "1INCH-EUR", "current": 0.178, "average": 0.548, "minimum": 0.292, "maximum": 0.849, "perc_above_avg": 53.081, "perc_beneath_avg": 46.919, "avg_price_above_avg": 0.639, "avg_price_beneath_avg": 0.445}
+{"currency": "AAVE-EUR", "current": 144.89, "average": 73.801, "minimum": 48.56, "maximum": 107.61, "perc_above_avg": 59.242, "perc_beneath_avg": 40.758, "avg_price_above_avg": 83.58, "avg_price_beneath_avg": 59.588}
+{"currency": "ADA-EUR", "current": 0.614, "average": 0.382, "minimum": 0.227, "maximum": 0.56, "perc_above_avg": 47.393, "perc_beneath_avg": 52.607, "avg_price_above_avg": 0.458, "avg_price_beneath_avg": 0.314}
+{"currency": "ADX-EUR", "current": 0.084, "average": 0.154, "minimum": 0.102, "maximum": 0.217, "perc_above_avg": 62.085, "perc_beneath_avg": 37.915, "avg_price_above_avg": 0.172, "avg_price_beneath_avg": 0.125}
